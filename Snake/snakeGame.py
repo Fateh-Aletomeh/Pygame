@@ -17,11 +17,11 @@ head_images = [pygame.image.load("snake_up.jpg"),
 
 
 class Point:
-    def __init__(self, x, y):
+    def __init__(self, x: int, y: int):
         self.x = x
         self.y = y
 
-    def move(self, direction):
+    def move(self, direction: int) -> None:
         if direction == 0:
             self.y -= 20
             if self.y < 0:
@@ -41,43 +41,41 @@ class Point:
 
 
 class Head(Point):
-    def __init__(self, x, y):
+    def __init__(self, x: int, y: int):
         super().__init__(x, y)
 
-    def draw(self, window, direction):
+    def draw(self, window: pygame.surface.Surface, direction: int) -> None:
         window.blit(head_images[direction], (self.x, self.y))
 
 
 class Body(Point):
-    def __init__(self, x, y):
+    def __init__(self, x: int, y: int):
         super().__init__(x, y)
 
-    def draw(self, window):
+    def draw(self, window: pygame.surface.Surface) -> None:
         pygame.draw.rect(window, (199, 6, 7), (self.x, self.y, 20, 20))
 
 
 class Snack(Point):
-    def __init__(self, x, y):
+    def __init__(self, x: int, y: int):
         super().__init__(x, y)
 
-    def draw(self, window):
+    def draw(self, window: pygame.surface.Surface) -> None:
         pygame.draw.rect(window, (51, 204, 51), (self.x, self.y, 20, 20))
 
 
-def readKeys(keys, direction):
+def readKeys(keys: pygame.key.ScancodeWrapper, direction: int) -> int:
     if keys[pygame.K_UP] and direction != 2:
-        direction = 0
+        return 0
     elif keys[pygame.K_RIGHT] and direction != 3:
-        direction = 1
+        return 1
     elif keys[pygame.K_DOWN] and direction != 0:
-        direction = 2
+        return 2
     elif keys[pygame.K_LEFT] and direction != 1:
-        direction = 3
-
-    return direction
+        return 3
 
 
-def createNextBody(prev_x, prev_y, direction):
+def createNextBody(prev_x: int, prev_y: int, direction: int) -> Body:
     if direction == 0:
         return Body(prev_x, prev_y + 20)
     elif direction == 1:
@@ -88,7 +86,7 @@ def createNextBody(prev_x, prev_y, direction):
         return Body(prev_x + 20, prev_y)
 
 
-def checkDelay(length):
+def checkDelay(length: int) -> int:
     if length < 10:
         return 100
     elif length < 30:
@@ -101,7 +99,7 @@ def checkDelay(length):
         return 55
 
 
-def checkHighScore(score):
+def checkHighScore(score: int) -> None:
     file = open("highscore.txt")
     if score > int(file.read()):
         file = open("highscore.txt", "w")
@@ -109,7 +107,7 @@ def checkHighScore(score):
     file.close()
 
 
-def outputHighScore(score):
+def outputHighScore(score: int) -> None:
     from tkinter import messagebox
     file = open("highscore.txt")
     highscore = file.read()
