@@ -17,7 +17,7 @@ head_images = [pygame.image.load("snake_up.jpg"),
 
 
 class Point:
-    def __init__(self, x: int, y: int):
+    def __init__(self, x: int, y: int) -> None:
         self.x = x
         self.y = y
 
@@ -41,7 +41,7 @@ class Point:
 
 
 class Head(Point):
-    def __init__(self, x: int, y: int):
+    def __init__(self, x: int, y: int) -> None:
         super().__init__(x, y)
 
     def draw(self, window: pygame.surface.Surface, direction: int) -> None:
@@ -49,7 +49,7 @@ class Head(Point):
 
 
 class Body(Point):
-    def __init__(self, x: int, y: int):
+    def __init__(self, x: int, y: int) -> None:
         super().__init__(x, y)
 
     def draw(self, window: pygame.surface.Surface) -> None:
@@ -57,7 +57,7 @@ class Body(Point):
 
 
 class Snack(Point):
-    def __init__(self, x: int, y: int):
+    def __init__(self, x: int, y: int) -> None:
         super().__init__(x, y)
 
     def draw(self, window: pygame.surface.Surface) -> None:
