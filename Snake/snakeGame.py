@@ -73,6 +73,8 @@ def readKeys(keys: pygame.key.ScancodeWrapper, direction: int) -> int:
         return 2
     elif keys[pygame.K_LEFT] and direction != 1:
         return 3
+    else:
+        return direction
 
 
 def createNextBody(prev_x: int, prev_y: int, direction: int) -> Body:
